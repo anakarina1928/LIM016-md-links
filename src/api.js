@@ -1,20 +1,22 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs');//proporciona muchas funciones muy útiles para acceder e interactuar con el sistema de archivos.
+const path = require('path');//proporciona utilidades para trabajar con rutas de archivos y directorios.
+const axios = require('axios');//Axios es un cliente HTTP basado en promesas para node.jsy el navegador
+
 const userPath = './data/data.md';
 
 //para ver si la ruta es absoluta o relativa
 const pathToAbsolute = (filePath) => {
-    if (path.isAbsolute(filePath)) {
-        return filePath;// si es absolta retorno la ruta y ya.
+  if (path.isAbsolute(filePath)) {
+    return filePath;// si es absolta retorno la ruta y ya.
 
-    } else {
-        return path.resolve(filePath);// si no es absoluta la convierto.
-    }
+  } else {
+    return path.resolve(filePath);// si no es absoluta la convierto.
+  }
 }
 
-//Valida si el archivo existe
+//Validar si el archivo existe
 const validPath = (filePath) => {
-    return fs.existsSync(filePath);
+  return fs.existsSync(filePath);
 }
 
 
@@ -23,28 +25,61 @@ const regxUrl = /\(((?:\/|https?:\/\/)[\w\d./?=#&_%~,.:-]+)\)/mg;
 const regxText = /\[[\w\s\d.()]+\]/;
 
 
-//leer los archivos y extraer los links
+//leer los archivos y extraer los links. Esta funcion me retorna un arreglo de objetos con los links encontados.
 const readingLinks = (filePath) => {
 
-    const fileContent = fs.readFileSync(filePath, 'utf-8');//leemos el archivo 
-    const arrayLinks = fileContent.match(regxLink);/* extraigo los links que coincidan con mi expresion regular
+  const fileContent = fs.readFileSync(filePath, 'utf-8');//leemos el archivo 
+  const arrayLinks = fileContent.match(regxLink);/* extraigo los links que coincidan con mi expresion regular
     match() se usa para obtener todas las ocurrencias de una expresión regular dentro de una cadena.*/
-    console.log(arrayLinks);
-    return arrayLinks.map((myLinks) => {
 
-        const myhref = myLinks.match(regxUrl);
-        const mytext = myLinks.match(regxText);
+  return arrayLinks.map((myLinks) => {
 
-        return {
-            url: myhref[0].slice(1, -1),
-            text: mytext[0].slice(1, -1),
-            fileName: filePath
+    const myhref = myLinks.match(regxUrl).join().slice(1, -1);//URL encontradas
+    const mytext = myLinks.match(regxText).join().slice(1, -1);//Texto que aparecía dentro del link
 
-        }
+    return {
+      href: myhref,
+      text: mytext,
+      fileName: filePath//Ruta del archivo donde se encontró el link.
 
-    })
+    }
+
+  })
 
 }
+
+//validar si los links funcionan correctamente. Debo hacer una peticion http.
+const makeHttpRequest = (arrayLinks) => {
+  const htttpPromisesArray = arrayLinks.map(link => axios.get(link.href));/*con el metodo get de axios obtengo las url y 
+   arreglo de promesas de llamadas http*/
+
+  const httpPromisesResolved = Promise.allSettled(htttpPromisesArray); /*allSettled devuelve una promesa que se resuelve después que
+   todas las promesas dadas se hayan cumplido o rechazado, con una serie de objetos que describen el resultado de cada promesa.*/
+
+  return httpPromisesResolved.then(htttpPromisesArrayResolved => {//the es un metodo que debuelve una promesa 
+
+    return htttpPromisesArrayResolved.map(promiseResult => {
+
+      if (promiseResult.status == 'fulfilled') {
+        return {/*Si se recibe un valor, la Promesa devuelta por el método  then queda resuelta adoptando el valor de retorno.
+          Promesa resuelta*/
+          status: promiseResult.value.status,
+          ok: promiseResult.value.statusText
+        }
+      } else {
+        return {/*Si se produce un error, la Promesa devuelta por el método  then es rechazada, adoptando el error como su valor.
+          Promera rechazada*/
+          status: promiseResult.reason.response.status,
+          fail: promiseResult.reason.response.statusText//contiene el mensaje de estado correspondiente al código de estado HTTP 
+
+        }
+      };
+    });
+  })
+}
+
+
+console.log(makeHttpRequest(readingLinks('./data/data.md')));
 
 //console.log(readingLinks('./data/data.md'));
 
