@@ -7,4 +7,4 @@ encontrar varios archivos en ese formato en cualquier tipo de repositorio
 (empezando por el tradicional `README.md`).
 
 
-[Markdown2](https://es.wikipedia.org/wiki/Markdown)
+[Markdown2](https://es.wikipedia.org/wiki/Markdown2)
