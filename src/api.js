@@ -56,8 +56,8 @@ const makeHttpRequest = (arrayLinks) => {
   const httpPromisesResolved = Promise.allSettled(htttpPromisesArray); /*allSettled devuelve una promesa que se resuelve después que
    todas las promesas dadas se hayan cumplido o rechazado, con una serie de objetos que describen el resultado de cada promesa.*/
 
-  return httpPromisesResolved.then(htttpPromisesArrayResolved => {//the es un metodo que debuelve una promesa 
-
+  return httpPromisesResolved.then(htttpPromisesArrayResolved => {//then es un metodo que debuelve una promesa 
+    // convertimos un arreglo de promesas en un arreglo de objetos y eso es lo que retornamos 
     return htttpPromisesArrayResolved.map(promiseResult => {
 
       if (promiseResult.status == 'fulfilled') {
@@ -79,11 +79,17 @@ const makeHttpRequest = (arrayLinks) => {
 }
 
 
-console.log(makeHttpRequest(readingLinks('./data/data.md')));
+//console.log(makeHttpRequest(readingLinks('./data/data.md')));
 
 //console.log(readingLinks('./data/data.md'));
 
+module.exports = {
+  pathToAbsolute,
+  validPath,
+  readingLinks,
+  makeHttpRequest
 
+}
 
 
 
