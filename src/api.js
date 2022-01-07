@@ -12,13 +12,59 @@ const pathToAbsolute = (filePath) => {
   } else {
     return path.resolve(filePath);// si no es absoluta la convierto.
   }
-}
+};
 
 //Validar si el archivo existe
 const validPath = (filePath) => {
   return fs.existsSync(filePath);
+};
+//recorriendo archivos
+/*
+const browseDirectories = (filePath) =>{
+  
+
+  if (filePath.isDirectory()){
+    const readingDirectory = fs.readdir(filePath);//leer de forma asincrónica el contenido de un directorio
+    readingDirectory.map((file)=>{ 
+       
+      return  path.join(filePath,file); // cadena de ruta unida--- ruta absoluta que esta dentro de esa carpeta
+      
+    
+  });
+}else{
 }
 
+};
+     
+console.log(browseDirectories('./data'));
+*/
+
+const isDirectory = (filePath) => {
+
+  return fs.statSync(filePath).isDirectory();
+};
+
+
+const browseFile = (filePath, arrayFile) => {
+
+  if (!isDirectory(filePath)) {
+
+    arrayFile.push(filePath);//si la ruta es absoluta tambien la agregro en mi arreglo global 
+
+  } else {
+    const readDirectory = fs.readdirSync(filePath);//leer de forma asincrónica el contenido de un directorio
+    let absolutePath = readDirectory.map((fileName) => {
+      return path.join(filePath, fileName)
+    })// cadena de ruta unida--- ruta absoluta que esta dentro de esa carpeta
+    absolutePath.forEach((fileNamePath) => {
+      browseFile(fileNamePath, arrayFile)
+
+    });
+  }
+  return arrayFile;// esto es lo que retorna mi funcion 
+};
+
+//console.log(browseFile(pathToAbsolute('./data'), []));
 
 const regxLink = /\[([\w\s\d.()]+)\]\(((?:\/|https?:\/\/)[\w\d./?=#&_%~,.:-]+)\)/mg;
 const regxUrl = /\(((?:\/|https?:\/\/)[\w\d./?=#&_%~,.:-]+)\)/mg;
@@ -44,13 +90,13 @@ const readingLinks = (filePath) => {
 
     }
 
-  })
+  });
 
-}
+};
 
 //validar si los links funcionan correctamente. Debo hacer una peticion http.
 const makeHttpRequest = (arrayLinks) => {
-  const htttpPromisesArray = arrayLinks.map(link => axios.get(link.href));/*con el metodo get de axios obtengo las url y 
+  const htttpPromisesArray = arrayLinks.map(link => axios.get(link.href));/* GET:OBTENER con el metodo get de axios obtengo las url y 
    arreglo de promesas de llamadas http*/
 
   const httpPromisesResolved = Promise.allSettled(htttpPromisesArray); /*allSettled devuelve una promesa que se resuelve después que
@@ -75,8 +121,8 @@ const makeHttpRequest = (arrayLinks) => {
         }
       };
     });
-  })
-}
+  });
+};
 
 
 //console.log(makeHttpRequest(readingLinks('./data/data.md')));
@@ -87,7 +133,8 @@ module.exports = {
   pathToAbsolute,
   validPath,
   readingLinks,
-  makeHttpRequest
+  makeHttpRequest,
+  browseFile
 
 }
 
