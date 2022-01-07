@@ -42,7 +42,7 @@ const mdLinks = (userPath, options) => {
   });
 }
 
-mdLinks('./error', { validate: true })
+mdLinks('./data', { validate: true })
 .then(finalArray => console.log('final array: ', finalArray))
 .catch(err => console.log(err));
   //console.log("Promesa resuelta");
