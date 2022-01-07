@@ -1,6 +1,7 @@
 const fs = require('fs');//proporciona muchas funciones muy útiles para acceder e interactuar con el sistema de archivos.
 const path = require('path');//proporciona utilidades para trabajar con rutas de archivos y directorios.
 const axios = require('axios');//Axios es un cliente HTTP basado en promesas para node.jsy el navegador
+const { info } = require('console');
 
 const userPath = './data/data.md';
 
@@ -61,7 +62,7 @@ const browseFile = (filePath, arrayFile) => {
 
     });
   }
-  return arrayFile;// esto es lo que retorna mi funcion 
+  return arrayFile.flat();// esto es lo que retorna mi funcion 
 };
 
 //console.log(browseFile(pathToAbsolute('./data'), []));
@@ -77,6 +78,11 @@ const readingLinks = (filePath) => {
   const fileContent = fs.readFileSync(filePath, 'utf-8');//leemos el archivo 
   const arrayLinks = fileContent.match(regxLink);/* extraigo los links que coincidan con mi expresion regular
     match() se usa para obtener todas las ocurrencias de una expresión regular dentro de una cadena.*/
+  //console.log('extraccion de links: ', arrayLinks);
+
+  if (arrayLinks === null) {
+    return [];
+  }
 
   return arrayLinks.map((myLinks) => {
 

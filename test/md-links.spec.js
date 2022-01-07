@@ -40,12 +40,7 @@ describe('probando la funcion  browseFile verifica si la ruta es un directorio, 
     
     });
 
-  /* it('deberia indicart cuantos archivos hay', () => {
-      const result = api.browseFile(api.pathToAbsolute('\\Users\\anaka\\Laboratoria\\LIM016-md-links\\data\\test\\ana.txt'), [])
-      
-      expect(result).toBe(arrayTest)
-    
-    });*/
+
   });
 
 
