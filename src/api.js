@@ -1,7 +1,7 @@
 const fs = require('fs');//proporciona muchas funciones muy útiles para acceder e interactuar con el sistema de archivos.
 const path = require('path');//proporciona utilidades para trabajar con rutas de archivos y directorios.
 const axios = require('axios');//Axios es un cliente HTTP basado en promesas para node.jsy el navegador
-const { info } = require('console');
+
 
 const userPath = './data/data.md';
 
@@ -20,38 +20,26 @@ const validPath = (filePath) => {
   return fs.existsSync(filePath);
 };
 //recorriendo archivos
-/*
-const browseDirectories = (filePath) =>{
-  
 
-  if (filePath.isDirectory()){
-    const readingDirectory = fs.readdir(filePath);//leer de forma asincrónica el contenido de un directorio
-    readingDirectory.map((file)=>{ 
-       
-      return  path.join(filePath,file); // cadena de ruta unida--- ruta absoluta que esta dentro de esa carpeta
-      
-    
-  });
-}else{
-}
-
-};
-     
-console.log(browseDirectories('./data'));
-*/
 
 const isDirectory = (filePath) => {
 
   return fs.statSync(filePath).isDirectory();
 };
+const isMdFile = (filePath)=> {
+  return path.extname(filePath) === '.md'
+}
 
 
 const browseFile = (filePath, arrayFile) => {
 
   if (!isDirectory(filePath)) {
-
-    arrayFile.push(filePath);//si la ruta es absoluta tambien la agregro en mi arreglo global 
-
+   
+    if(isMdFile){
+     
+      arrayFile.push(filePath);//si la ruta es absoluta tambien la agregro en mi arreglo global 
+    }
+    
   } else {
     const readDirectory = fs.readdirSync(filePath);//leer de forma asincrónica el contenido de un directorio
     let absolutePath = readDirectory.map((fileName) => {
@@ -62,7 +50,7 @@ const browseFile = (filePath, arrayFile) => {
 
     });
   }
-  return arrayFile.flat();// esto es lo que retorna mi funcion 
+  return arrayFile// esto es lo que retorna mi funcion 
 };
 
 //console.log(browseFile(pathToAbsolute('./data'), []));
@@ -140,7 +128,9 @@ module.exports = {
   validPath,
   readingLinks,
   makeHttpRequest,
-  browseFile
+  browseFile,
+  isMdFile,
+  isDirectory
 
 }
 
