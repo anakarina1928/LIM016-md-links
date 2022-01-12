@@ -1,14 +1,13 @@
 {
   "name": "md-links",
   "version": "0.1.0",
-  "scripts": { 
-    
+  "scripts": {
     "test": "jest --verbose --coverage",
     "open-coverage-report": "opener ./coverage/lcov-report/index.html"
-   
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "jest": "^27.0.1"
+    "jest": "^27.0.1",
+    "nodemon": "^2.0.15"
   }
 }

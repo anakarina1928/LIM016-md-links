@@ -26,34 +26,40 @@ const isDirectory = (filePath) => {
 
   return fs.statSync(filePath).isDirectory();
 };
-const isMdFile = (filePath)=> {
-  return path.extname(filePath) === '.md'
+
+const isMdFile = (filePath) => {
+  return path.extname(filePath) === '.md';
 }
 
+//busqueda de mi archivo
+const browseFile = (filePath) => {
+  let arrayFile = [];
+  
+  const searchFilesRecursively = (filePath) => {
 
-const browseFile = (filePath, arrayFile) => {
+    if (!isDirectory(filePath)) {
 
-  if (!isDirectory(filePath)) {
-   
-    if(isMdFile){
-     
-      arrayFile.push(filePath);//si la ruta es absoluta tambien la agregro en mi arreglo global 
+      if (isMdFile) {
+        arrayFile.push(filePath);//si la ruta es absoluta tambien la agregro en mi arreglo global 
+        
+      }
+
+    } else {
+      const readDirectory = fs.readdirSync(filePath);//leer de forma asincrónica el contenido de un directorio
+
+      let absolutePath = readDirectory.map((fileName) => path.join(filePath, fileName))// cadena de ruta unida--- ruta absoluta que esta dentro de esa carpeta
+
+      absolutePath.forEach((fileNamePath) => {
+        searchFilesRecursively (fileNamePath)
+        
+      });
     }
-    
-  } else {
-    const readDirectory = fs.readdirSync(filePath);//leer de forma asincrónica el contenido de un directorio
-    let absolutePath = readDirectory.map((fileName) => {
-      return path.join(filePath, fileName)
-    })// cadena de ruta unida--- ruta absoluta que esta dentro de esa carpeta
-    absolutePath.forEach((fileNamePath) => {
-      browseFile(fileNamePath, arrayFile)
-
-    });
-  }
+  };
+  searchFilesRecursively(filePath);
   return arrayFile// esto es lo que retorna mi funcion 
 };
 
-//console.log(browseFile(pathToAbsolute('./data'), []));
+//console.log(browseFile(pathToAbsolute('./data')));
 
 const regxLink = /\[([\w\s\d.()]+)\]\(((?:\/|https?:\/\/)[\w\d./?=#&_%~,.:-]+)\)/mg;
 const regxUrl = /\(((?:\/|https?:\/\/)[\w\d./?=#&_%~,.:-]+)\)/mg;
@@ -119,7 +125,7 @@ const makeHttpRequest = (arrayLinks) => {
 };
 
 
-//console.log(makeHttpRequest(readingLinks('./data/data.md')));
+//console.log(makeHttpRequest(readingLinks('./dat/data.md')));
 
 //console.log(readingLinks('./data/data.md'));
 
