@@ -12,7 +12,7 @@ const mdLinks = (userPath, options) => {
     if (validPath) {
 
       if (options.validate === true) {
-        const filepathList = api.browseFile(absolutePath, [])
+        const filepathList = api.browseFile(absolutePath)
 
         let arrayLinks = filepathList.map((file) => {
           return api.readingLinks(file);
@@ -43,6 +43,6 @@ const mdLinks = (userPath, options) => {
 }
 
 mdLinks('./data', { validate: true })
-.then(finalArray => console.log('final array: ', finalArray))
-.catch(err => console.log(err));
+  .then(finalArray => console.log('final array: ', finalArray))
+  .catch(err => console.log(err));
   //console.log("Promesa resuelta");
