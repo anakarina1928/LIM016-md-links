@@ -2,9 +2,6 @@ const fs = require('fs');//proporciona muchas funciones muy útiles para acceder
 const path = require('path');//proporciona utilidades para trabajar con rutas de archivos y directorios.
 const axios = require('axios');//Axios es un cliente HTTP basado en promesas para node.jsy el navegador
 
-
-const userPath = './data/data.md';
-
 //para ver si la ruta es absoluta o relativa
 const pathToAbsolute = (filePath) => {
   if (path.isAbsolute(filePath)) {
@@ -127,7 +124,7 @@ const makeHttpRequest = (arrayLinks) => {
 
 //console.log(makeHttpRequest(readingLinks('./dat/data.md')));
 
-//console.log(readingLinks('./data/data.md'));
+console.log(readingLinks('./data/data.md'));
 
 module.exports = {
   pathToAbsolute,
