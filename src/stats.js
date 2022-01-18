@@ -12,4 +12,4 @@ const totalLinks = (arraylinks) => {
 }
 
 
-
+module.exports = totalLinks;

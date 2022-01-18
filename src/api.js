@@ -124,7 +124,7 @@ const makeHttpRequest = (arrayLinks) => {
 
 //console.log(makeHttpRequest(readingLinks('./dat/data.md')));
 
-console.log(readingLinks('./data/data.md'));
+//console.log(readingLinks('./data/data.md'));
 
 module.exports = {
   pathToAbsolute,

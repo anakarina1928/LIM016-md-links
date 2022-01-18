@@ -11,13 +11,13 @@ const mdLinks = (userPath, options) => {
     const validPath = api.validPath(absolutePath);
     if (validPath) {
 
+      const filepathList = api.browseFile(absolutePath)
+
+      let arrayLinks = filepathList.map((file) => {
+        return api.readingLinks(file);
+      }).flat();
+
       if (options.validate === true) {
-        const filepathList = api.browseFile(absolutePath)
-
-        let arrayLinks = filepathList.map((file) => {
-          return api.readingLinks(file);
-        }).flat();
-
         //array de objetos
         const promiseStatusLinks = api.makeHttpRequest(arrayLinks);//array de objetos que contienen la forma: { status: 200, }
 
@@ -29,9 +29,11 @@ const mdLinks = (userPath, options) => {
               ...arrayHttpStatus[index]
             }
           })
-          resolve(unificationOfObjects)
+          resolve(unificationOfObjects);
         })
 
+      } else{// retorna el array de links
+        resolve(arrayLinks);
       }
 
     } else {
@@ -42,7 +44,6 @@ const mdLinks = (userPath, options) => {
   });
 }
 
-mdLinks('./data', { validate: true })
-  .then(finalArray => console.log('final array: ', finalArray))
-  .catch(err => console.log(err));
-  //console.log("Promesa resuelta");
+//console.log("Promesa resuelta");
+
+module.exports = mdLinks;
