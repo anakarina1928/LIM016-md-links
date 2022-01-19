@@ -37,7 +37,12 @@ const mdLinks = (userPath, options) => {
       }
 
     } else {
-      reject(`La ruta ${absolutePath} no existe`)
+      reject(`
+      
+      ╭─────────────────────❀
+      │ LA RUTA  ${absolutePath} NO EXISTE
+      ╰─────────────────────❀
+      `)
     }
 
 
