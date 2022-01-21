@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const [, , ...args] = process.argv;
 
 if (args.length === 0) {
-    console.error( chalk.magenta.bold(
+    console.error(chalk.magenta.bold(
         ` 
     ╭─────────────────────❀
     │     Ingresa la ruta de un archivo
@@ -14,7 +14,7 @@ if (args.length === 0) {
 
 if (args.length === 1 && args[0] === '--help') {
 
-    const help = chalk.magenta.bold( `
+    const help = chalk.magenta.bold(`
     ╭─────────────────────❀
     │    Tus opciones son las siguientes:
     ╰─────────────────────❀
@@ -38,7 +38,7 @@ if (args.length === 1) {
     mdlinks(args[0], { validate: false })
         .then(arrayLinks => arrangemenTemplate(arrayLinks))
         .catch(err => console.log(err));
-        return
+    return
 }
 
 const posicionUno = args[1].toLowerCase();

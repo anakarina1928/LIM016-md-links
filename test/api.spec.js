@@ -1,6 +1,9 @@
 const api = require('../src/api');
 const userPath = './data/data-test.md';
+const axios = require('axios');
 
+//Creamos el mock de axios
+jest.mock('axios');
 
 describe('probando la funcion pathToAbsolute  para ver si la ruta es absoluta o relativa', () => {
   const result = api.pathToAbsolute(userPath)
@@ -79,3 +82,32 @@ describe('probando la funcion readingLinks que lee los archivos y retorna un arr
     expect(result).toStrictEqual([])
   });
 });
+
+describe('probando la funcion makeHttpRequest que hace la peticion http', ()  =>{
+
+  const objectTest = [{
+    href: 'https://es.wikipedia.org/wiki/Markdown',
+    text: 'Markdown',
+    fileName: userPath
+  }]
+
+  it('deberia retornar un arreglo con un link y su estutus 200', () =>{
+    //preparando el mock y la data
+    const data = { 
+        status: 200,
+        statusText: "OK"
+      }
+    axios.get.mockImplementation(() => Promise.resolve(data));
+
+    //Ejecutamos el metodo
+    const result = api.makeHttpRequest(objectTest);
+    
+    //Verificaciones
+    return result.then( arrayHttpRequestResolved => {      
+      expect(arrayHttpRequestResolved.length).toBe(1); 
+      expect(arrayHttpRequestResolved[0].status).toBe(200);
+      expect(arrayHttpRequestResolved[0].ok).toStrictEqual("OK");
+    })
+    
+  })
+})
