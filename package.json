@@ -1,6 +1,20 @@
 {
-  "name": "md-links",
+  "name": "anakarina-links",
   "version": "0.1.0",
+  "description": "Herramienta de línea de comando que permite validar las URLs dentro de archivos markdown, a partir de la ruta que recibe como argumento, analizará el archivo e imprimirá los links que encuentre.",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "md-Links",
+    "Markdown",
+    "links"
+  ],
+  "author": {
+    "name": "Ana Karina Gonzalez",
+    "email": "anakarina.nak@gmail.com"
+  },
   "scripts": {
     "test": "jest --verbose --coverage",
     "open-coverage-report": "opener ./coverage/lcov-report/index.html"
@@ -13,5 +27,10 @@
   },
   "bin": {
     "md-links": "./src/cli.js"
+  },
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
   }
 }
