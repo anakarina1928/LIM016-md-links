@@ -50,7 +50,7 @@ describe('probando la funcion  browseFile verifica si la ruta es un directorio, 
 
 
   it('deberia indicart cuantos archivos hay', () => {
-    const result = api.browseFile(api.pathToAbsolute('./data'), [])
+    const result = api.browseFile(api.pathToAbsolute('./data'))
 
     expect(result).toHaveLength(3);
 

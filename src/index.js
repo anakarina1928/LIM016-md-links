@@ -1,5 +1,5 @@
 const api = require('./api');
-const userPath = './data';
+const chalk = require('chalk');
 
 /*La función debe retornar una promesa (Promise) que resuelva a 
 un arreglo (Array) de objetos (Object) ¡se debe unificar los dos!*/
@@ -11,11 +11,12 @@ const mdLinks = (userPath, options) => {
     const validPath = api.validPath(absolutePath);
     if (validPath) {
 
-      const filepathList = api.browseFile(absolutePath)
+      const filepathList = api.browseFile(absolutePath);//busqueda de mis archivos
 
       let arrayLinks = filepathList.map((file) => {
-        return api.readingLinks(file);
-      }).flat();
+        return api.readingLinks(file);//leo los archivos y extraigo mis links
+      }).flat();/*crea una nueva matriz con todos los elementos de sub-array 
+      concatenados recursivamente hasta la profundidad especificada.*/
 
       if (options.validate === true) {
         //array de objetos
@@ -37,12 +38,12 @@ const mdLinks = (userPath, options) => {
       }
 
     } else {
-      reject(`
+      reject(chalk.magenta.bold(`
       
       ╭─────────────────────❀
       │ LA RUTA  ${absolutePath} NO EXISTE
       ╰─────────────────────❀
-      `)
+      `))
     }
 
 
