@@ -2,7 +2,9 @@
 const { arrangemenTemplate, statusTemplate, totalLinks } = require("./utils.js");
 const mdlinks = require("./index.js");
 const chalk = require('chalk');
-const [, , ...args] = process.argv;
+const [, , ...args] = process.argv;/*sta propiedad devuelve una matriz que contiene los
+ argumentos pasados ​​al proceso cuando se ejecuta en la línea de comandos. El primer elemento 
+ es la ruta de ejecución del proceso y el segundo elemento es la ruta del archivo js.*/ 
 
 if (args.length === 0) {
     console.error(chalk.magenta.bold(
