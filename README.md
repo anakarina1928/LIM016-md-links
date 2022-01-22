@@ -1,5 +1,10 @@
 # Markdown Links &#127800;
-Es una librería que sirve para devolver el número de enlaces que contiene un archivo MD, permitiendo ver a su vez  estadísticas sobre:&#10004; total de links.&#10004; links únicos. &#10004;links rotos.
+Es una librería que sirve para devolver el número de enlaces que contiene un archivo MD, permitiendo ver a su vez  estadísticas sobre:
+
+- total de links.
+- links únicos. 
+- links rotos.
+
 
 ## ✔️1. Instalación
 Mediante npm:
@@ -24,20 +29,25 @@ md-links <path-to-file> [options]
 
 --validate o -v
 
- &#10004;validara cada link dentro del archivo. &#10004;obtiene ruta del archivo href.  &#10004;mensaje de OK o FAIL. &#10004;estado del link y texto.
+ - validara cada link dentro del archivo.
+ - obtiene ruta del archivo href.  
+ - mensaje de OK o FAIL. 
+ - estado del link y texto.
 
  ![md-links-status](imagenes/status-de-links.png)
 
  --stats o -s
 
- &#10004;para obtener el total de links. &#10004;cantidad de links únicos. &#10004;links rotos.
+ - para obtener el total de links. 
+ - cantidad de links únicos. 
+ - links rotos.
 
  
  ![md-links-stats](imagenes/stats.png)
 
  --validate --stats 
 
- &#10004;podras tener toda la informacion junta.
+ - podras tener toda la informacion junta.
 
  ![md-links-v&s](imagenes/mdlinks_2.png)
 
