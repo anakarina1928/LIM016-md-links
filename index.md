@@ -1,37 +1,59 @@
-## Welcome to GitHub Pages
+# Markdown Links &#127800;
+Es una librería que sirve para devolver el número de enlaces que contiene un archivo MD, permitiendo ver a su vez  estadísticas sobre:
 
-You can use the [editor on GitHub](https://github.com/anakarina1928/LIM016-md-links/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+- total de links.
+- links únicos. 
+- links rotos.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+## ✔️1. Instalación
+Mediante npm:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+ &#10004; npm i anakarina-links
 
-```markdown
-Syntax highlighted code block
+## ✔️2. Guia de uso
 
-# Header 1
-## Header 2
-### Header 3
+Esta aplicación se puede ejecutar a través de la terminal:
 
-- Bulleted
-- List
+md-links <path-to-file> [options]
 
-1. Numbered
-2. List
+### ejemplo:
 
-**Bold** and _Italic_ and `Code` text
+`md-links <ruta>` 
 
-[Link](url) and ![Image](src)
-```
+![md-links](imagenes/mdlinks_1.png)
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+### Options
 
-### Jekyll Themes
+`md-links <ruta> [options]`
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/anakarina1928/LIM016-md-links/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+--validate o -v
 
-### Support or Contact
+ - validara cada link dentro del archivo.
+ - obtiene ruta del archivo href.  
+ - mensaje de OK o FAIL. 
+ - estado del link y texto.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+ ![md-links-status](imagenes/status-de-links.png)
+
+ --stats o -s
+
+ - para obtener el total de links. 
+ - cantidad de links únicos. 
+ - links rotos.
+
+ 
+ ![md-links-stats](imagenes/stats.png)
+
+ --validate --stats 
+
+ - podras tener toda la informacion junta.
+
+ ![md-links-v&s](imagenes/mdlinks_2.png)
+
+## ✔️3. Autora
+
+Ana karina González López.&#128151;
+
+
+
