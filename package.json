@@ -1,6 +1,6 @@
 {
   "name": "anakarina-links",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Herramienta de línea de comando que permite validar las URLs dentro de archivos markdown, a partir de la ruta que recibe como argumento, analizará el archivo e imprimirá los links que encuentre.",
   "main": "src/index.js",
   "directories": {
