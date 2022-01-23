@@ -21,7 +21,7 @@ md-links <path-to-file> [options]
 
 `md-links <ruta>` 
 
-![md-links](imagenes/mdlinks_1.png)
+![md-links](https://github.com/anakarina1928/LIM016-md-links/blob/main/imagenes/mdlinks_1.png)
 
 ### Options
 
@@ -34,7 +34,7 @@ md-links <path-to-file> [options]
  - mensaje de OK o FAIL. 
  - estado del link y texto.
 
- ![md-links-status](imagenes/status-de-links.png)
+ ![md-links-status](https://github.com/anakarina1928/LIM016-md-links/blob/main/imagenes/status-de-links.png)
 
  --stats o -s
 
@@ -43,13 +43,13 @@ md-links <path-to-file> [options]
  - links rotos.
 
  
- ![md-links-stats](imagenes/stats.png)
+ ![md-links-stats](https://github.com/anakarina1928/LIM016-md-links/blob/main/imagenes/stats.png)
 
  --validate --stats 
 
  - podras tener toda la informacion junta.
 
- ![md-links-v&s](imagenes/mdlinks_2.png)
+ ![md-links-v&s](https://github.com/anakarina1928/LIM016-md-links/blob/main/imagenes/mdlinks_2.png)
 
 ## ✔️3. Autora
 
