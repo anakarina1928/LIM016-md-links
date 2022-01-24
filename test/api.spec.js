@@ -55,7 +55,7 @@ describe('probando la funcion  browseFile verifica si la ruta es un directorio, 
   it('deberia indicart cuantos archivos hay', () => {
     const result = api.browseFile(api.pathToAbsolute('./data'))
 
-    expect(result).toHaveLength(3);
+    expect(result).toHaveLength(4);
 
   });
 
@@ -83,7 +83,7 @@ describe('probando la funcion readingLinks que lee los archivos y retorna un arr
   });
 });
 
-describe('probando la funcion makeHttpRequest que hace la peticion http', ()  =>{
+describe('probando la funcion makeHttpRequest que hace la peticion http', () => {
 
   const objectTest = [{
     href: 'https://es.wikipedia.org/wiki/Markdown',
@@ -91,23 +91,45 @@ describe('probando la funcion makeHttpRequest que hace la peticion http', ()  =>
     fileName: userPath
   }]
 
-  it('deberia retornar un arreglo con un link y su estutus 200', () =>{
+  it('deberia retornar un arreglo con un link y su estatus 200', () => {
     //preparando el mock y la data
-    const data = { 
-        status: 200,
-        statusText: "OK"
-      }
-    axios.get.mockImplementation(() => Promise.resolve(data));
+    const data = {
+      status: 200,
+      statusText: "OK"
+    }
+
+
+    axios.get.mockImplementation(() => Promise.resolve(data));/*estoy diciendo: cuando llamemos a axios.get devulveme una
+    promesa resuelta con el resutado*/
 
     //Ejecutamos el metodo
     const result = api.makeHttpRequest(objectTest);
-    
+
     //Verificaciones
-    return result.then( arrayHttpRequestResolved => {      
-      expect(arrayHttpRequestResolved.length).toBe(1); 
+    return result.then(arrayHttpRequestResolved => {
+      expect(arrayHttpRequestResolved).toHaveLength(1);
       expect(arrayHttpRequestResolved[0].status).toBe(200);
       expect(arrayHttpRequestResolved[0].ok).toStrictEqual("OK");
     })
-    
+
+  })
+
+  it('deberia retornar un arreglo con un link el estatus 404 y fail ', () => {
+
+    const data = { response: { status: 404, statusText:"Not Found" } };
+
+    axios.get.mockImplementation(() => Promise.reject(data));
+
+    const result = api.makeHttpRequest(objectTest);
+
+
+    return result.then(arrayHttpRequestResolved => {
+      expect(arrayHttpRequestResolved).toHaveLength(1);
+      expect(arrayHttpRequestResolved[0].status).toBe(404);
+      expect(arrayHttpRequestResolved[0].fail).toStrictEqual("Not Found");
+
+    })
+
+
   })
 })
