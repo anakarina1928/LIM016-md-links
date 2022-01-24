@@ -31,14 +31,14 @@ const isMdFile = (filePath) => {
 //busqueda de mi archivo
 const browseFile = (filePath) => {
   let arrayFile = [];
-  
+
   const searchFilesRecursively = (filePath) => {
 
     if (!isDirectory(filePath)) {
 
       if (isMdFile) {
         arrayFile.push(filePath);//si la ruta es absoluta tambien la agregro en mi arreglo global 
-        
+
       }
 
     } else {
@@ -47,8 +47,8 @@ const browseFile = (filePath) => {
       let absolutePath = readDirectory.map((fileName) => path.join(filePath, fileName))// cadena de ruta unida--- ruta absoluta que esta dentro de esa carpeta
 
       absolutePath.forEach((fileNamePath) => {
-        searchFilesRecursively (fileNamePath)
-        
+        searchFilesRecursively(fileNamePath)
+
       });
     }
   };
@@ -56,7 +56,7 @@ const browseFile = (filePath) => {
   return arrayFile// esto es lo que retorna mi funcion 
 };
 
-//console.log(browseFile(pathToAbsolute('./data')));
+
 
 const regxLink = /\[([\w\s\d.()]+)\]\(((?:\/|https?:\/\/)[\w\d./?=#&_%~,.:-]+)\)/mg;
 const regxUrl = /\(((?:\/|https?:\/\/)[\w\d./?=#&_%~,.:-]+)\)/mg;
@@ -69,7 +69,7 @@ const readingLinks = (filePath) => {
   const fileContent = fs.readFileSync(filePath, 'utf-8');//leemos el archivo 
   const arrayLinks = fileContent.match(regxLink);/* extraigo los links que coincidan con mi expresion regular
     match() se usa para obtener todas las ocurrencias de una expresión regular dentro de una cadena.*/
-  //console.log('extraccion de links: ', arrayLinks);
+
 
   if (arrayLinks === null) {
     return [];
@@ -102,7 +102,7 @@ const makeHttpRequest = (arrayLinks) => {
   return httpPromisesResolved.then(htttpPromisesArrayResolved => {//then es un metodo que debuelve una promesa 
     // convertimos un arreglo de promesas en un arreglo de objetos y eso es lo que retornamos 
     return htttpPromisesArrayResolved.map(promiseResult => {
-
+      
       if (promiseResult.status == 'fulfilled') {
         return {/*Si se recibe un valor, la Promesa devuelta por el método  then queda resuelta adoptando el valor de retorno.
           Promesa resuelta*/

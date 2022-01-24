@@ -1,7 +1,7 @@
 const utils = require('../src/utils');
 const userPath = './data/data-test.md';
 
-const consoleSpy = jest.spyOn(console, 'log');
+const consoleSpy = jest.spyOn(console, 'log');// este moks es igual a el espia de de console y su metodo log
 
 const ejemplo = [
 
