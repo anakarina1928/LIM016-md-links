@@ -50,6 +50,6 @@ const mdLinks = (userPath, options) => {
   });
 }
 
-//console.log("Promesa resuelta");
+
 
 module.exports = mdLinks;
