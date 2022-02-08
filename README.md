@@ -9,7 +9,8 @@ Es una librería que sirve para devolver el número de enlaces que contiene un a
 ## ✔️1. Instalación
 Mediante npm:
 
- &#10004; npm i anakarina-links
+ &#10004; npm  install -g anakarina-links
+
 
 ## ✔️2. Guia de uso
 
